@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca7enhxl556dy"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_mdtgl"]
+[ext_resource type="PackedScene" uid="uid://crp6dav3uvo7h" path="res://merlin.tscn" id="2_3xog0"]
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_mdtgl")
+
+[node name="Merlin" parent="." instance=ExtResource("2_3xog0")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
