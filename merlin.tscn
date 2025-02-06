@@ -3564,5 +3564,5 @@ pitch = 37
 singing = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+volume_db = -25.511
 pitch_scale = 1.08
