@@ -8,7 +8,8 @@ var to: Vector2i
 #App.ico
 func _ready() -> void:
 	animation.animation_finished.connect(_on_animation_finished)
-	sam.speak(audio_player,"Hello I am Merlin")
+	SignalBus.ai_response.connect(ai_speak)
+	ai_speak("Hello I am Merlin")
 	
 	pass # Replace with function body.
 
@@ -16,7 +17,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("click"):
 		move()
 	pass
-	
+
+func ai_speak(sentence:String):
+	sam.speak(audio_player,sentence)
+
 func move():
 		var rand = RandomNumberGenerator.new()
 		var x = rand.randi_range(128, 3200)
