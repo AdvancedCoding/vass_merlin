@@ -3556,7 +3556,7 @@ script = ExtResource("1_gfwlb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j3kvf")
-animation = &"dissapear"
+animation = &"fly_left"
 
 [node name="GDSAM" type="Node" parent="."]
 script = ExtResource("3_p2puk")
@@ -3564,5 +3564,4 @@ pitch = 37
 singing = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
-pitch_scale = 1.08
+volume_db = -2.234

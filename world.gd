@@ -1,5 +1,5 @@
 extends Node2D
-
+signal random_trigger()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +25,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var r  = randi_range(1, 500)
+	if (r == 1):
+		emit_signal('random_trigger')
 	pass
+
+	
+
 func _mouse():
 	print("mouse")

@@ -9,3 +9,5 @@ script = ExtResource("1_mdtgl")
 [node name="Merlin" parent="." instance=ExtResource("2_3xog0")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="random_trigger" from="." to="Merlin" method="idle"]

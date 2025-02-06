@@ -9,7 +9,7 @@ var to: Vector2i
 func _ready() -> void:
 	animation.animation_finished.connect(_on_animation_finished)
 	sam.speak(audio_player,"Hello I am Merlin")
-	
+	#self.random_trigger.connect(move)
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
@@ -33,6 +33,17 @@ func tween_window_move(b_window,to:Vector2i,dir:String):
 	await tween.finished
 	var landstr :String = "land"+dir.erase(0,3) 
 	animation.play(landstr)
+	
+func idle():
+	var r  = randi_range(1, 2)
+	#print(r)
+	if (r == 1):
+		sam.speak(audio_player,"Hello are you there")
+	elif (r == 2):
+		move()
+
+	pass
+	
 	
 func _on_animation_finished():
 	match animation.animation:
