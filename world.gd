@@ -42,6 +42,7 @@ func _mouse():
 	print("mouse")
 
 func ask_AI(input:String): #curl http://localhost:11434/api/generate -d '{"model": "deepseek-r1:1.5b","prompt": "Why is the sky blue?","stream": false}'
+	SignalBus.reset_idle_timer.emit()
 	var fields = {"model": "deepseek-r1:1.5b","prompt": input,"stream": false} #codegemma,deepseek-r1:1.5b
 	var json = JSON.stringify(fields)
 	var headers = ["Content-Type: application/json"]

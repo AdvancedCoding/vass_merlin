@@ -46,12 +46,17 @@ func tween_window_move(b_window,to:Vector2i,dir:String):
 	animation.play(landstr)
 	
 func idle():
-	var r  = randi_range(1, 2)
+	var r  = randi_range(1, 4)
 	#print(r)
 	if (r == 1):
 		sam.speak(audio_player,"Hello are you there")
 	elif (r == 2):
 		move()
+	elif (r == 3):
+		SignalBus.ask_ai.emit("Tell me a fun fact")
+	elif (r == 4):
+		sam.speak(audio_player,"Uploading user data")
+		
 
 	pass
 	

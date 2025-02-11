@@ -17,6 +17,7 @@ func _on_idle_timer_timeout():
 	print("trigger idle event, new time: ", new_wait_time)
 	pass
 	
+#Resets timer back to its full wait time
 func _reset_timer():
 	self.start()
 	pass
