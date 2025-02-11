@@ -8,9 +8,13 @@ var to: Vector2i
 #App.ico
 func _ready() -> void:
 	animation.animation_finished.connect(_on_animation_finished)
+
 	SignalBus.ai_response.connect(ai_speak)
+	SignalBus.idle_timer_triggered.connect(idle)
+	
 	ai_speak("Hello I am Merlin")
 	
+
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
@@ -40,6 +44,22 @@ func tween_window_move(b_window,to:Vector2i,dir:String):
 	await tween.finished
 	var landstr :String = "land"+dir.erase(0,3) 
 	animation.play(landstr)
+	
+func idle():
+	var r  = randi_range(1, 4)
+	#print(r)
+	if (r == 1):
+		sam.speak(audio_player,"Hello are you there")
+	elif (r == 2):
+		move()
+	elif (r == 3):
+		SignalBus.ask_ai.emit("Tell me a fun fact")
+	elif (r == 4):
+		sam.speak(audio_player,"Uploading user data")
+		
+
+	pass
+	
 	
 func _on_animation_finished():
 	match animation.animation:
