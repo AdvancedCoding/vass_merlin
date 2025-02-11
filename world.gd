@@ -3,6 +3,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_tree().get_root().set_transparent_background(true)
+	print(self.get_window().transparent)
 	SignalBus.ask_ai.connect(ask_AI)
 	http_request.request_completed.connect(self._http_request_completed)
 	#https://docs.godotengine.org/en/stable/classes/class_window.html#class-window --self.get_window()
@@ -37,11 +38,11 @@ func _process(delta: float) -> void:
 	
 
 func _mouse():
-	SignalBus.ask_ai.emit("Why is the sky blue?")	
+	#SignalBus.ask_ai.emit("How to create a good meal")	
 	print("mouse")
 
 func ask_AI(input:String): #curl http://localhost:11434/api/generate -d '{"model": "deepseek-r1:1.5b","prompt": "Why is the sky blue?","stream": false}'
-	var fields = {"model": "deepseek-r1:1.5b","prompt": input,"stream": false}
+	var fields = {"model": "deepseek-r1:1.5b","prompt": input,"stream": false} #codegemma,deepseek-r1:1.5b
 	var json = JSON.stringify(fields)
 	var headers = ["Content-Type: application/json"]
 	http_request.request("http://127.0.0.1:11434/api/generate", headers, HTTPClient.METHOD_POST, json)

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://world.gd" id="1_mdtgl"]
 [ext_resource type="PackedScene" uid="uid://crp6dav3uvo7h" path="res://merlin.tscn" id="2_3xog0"]
 [ext_resource type="Script" path="res://Idle_timer.gd" id="3_k5pak"]
+[ext_resource type="PackedScene" uid="uid://cw40m6obsmyq7" path="res://input_text_window.tscn" id="3_co3js"]
 
 [node name="world" type="Node2D"]
 script = ExtResource("1_mdtgl")
@@ -10,6 +11,8 @@ script = ExtResource("1_mdtgl")
 [node name="Merlin" parent="." instance=ExtResource("2_3xog0")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Window" parent="." instance=ExtResource("3_co3js")]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 

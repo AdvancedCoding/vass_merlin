@@ -20,6 +20,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("click"):
 		move()
+	if Input.is_action_just_pressed("right_click"):
+		SignalBus.show_user_input_field.emit(true);
+		pass
 	pass
 
 func ai_speak(sentence:String):
