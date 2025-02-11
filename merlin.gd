@@ -10,6 +10,8 @@ func _ready() -> void:
 	animation.animation_finished.connect(_on_animation_finished)
 
 	SignalBus.ai_response.connect(ai_speak)
+	SignalBus.idle_timer_triggered.connect(idle)
+	
 	ai_speak("Hello I am Merlin")
 	
 

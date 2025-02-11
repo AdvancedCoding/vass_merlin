@@ -19,14 +19,19 @@ func _ready() -> void:
 	#https://docs.godotengine.org/en/stable/classes/class_displayserver.html#class-displayserver  
 	var mouse_pos= DisplayServer.mouse_get_position()
 	print(mouse_pos)
+	
+	#setup idle timer
+
+	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var r  = randi_range(1, 500)
-	if (r == 1):
-		emit_signal('random_trigger')
+	
+	#var r  = randi_range(1, 500)
+	#if (r == 1):
+	#	SignalBus.idle_timer_triggered.emit()
 	pass
 
 	
