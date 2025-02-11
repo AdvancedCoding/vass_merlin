@@ -10,4 +10,8 @@ script = ExtResource("1_mdtgl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+<<<<<<< HEAD
 [connection signal="random_trigger" from="." to="Merlin" method="idle"]
+=======
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+>>>>>>> master
