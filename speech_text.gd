@@ -10,35 +10,39 @@ var letter_index = 0
 var letter_time = 0.03
 var space_time = 0.06
 var punctuation_time = 0.2
-var original_pos: Vector2;
+var bubble_has_value = false
+#var original_pos: Vector2;
 func _ready() -> void:
 	visible = false
-	original_pos = global_position;
+	#original_pos = global_position;
 	MAX_WIDTH = get_window().size.x
+	global_position.y = -60;
 	#get_window().size = MAX_WIDTH
 	SignalBus.merlin_speak.connect(display_text)
 	#finished_displaying.connect(reset)
 	
 func display_text(ai_text:String):
-	visible = true
-	text = ai_text
-	label.text = ai_text
-	await resized
-	custom_minimum_size.x = min(size.x,MAX_WIDTH)
-	
-	if size.x > MAX_WIDTH:
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		await resized #wait x
-		await resized #wait y
+	if bubble_has_value == false: #stops listening after gets first signal because this is an instance class
+		bubble_has_value =true;
+		visible = true
+		text = ai_text
+		label.text = ai_text
+		#await resized
+		custom_minimum_size.x = min(size.x,MAX_WIDTH)
 		
-	global_position.x -= size.x / 2
-	global_position.y -= size.y + 24
-	label.text = ""
-	_display_letter()
-	
+		if size.x > MAX_WIDTH:
+			label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			await resized #wait x
+			await resized #wait y
+			custom_minimum_size.y = size.y
+			
+		global_position.x -= size.x / 2
+		global_position.y -= size.y + 24
+		label.text = ""
+		_display_letter()
+
 func _display_letter():
 	label.text += text[letter_index]
-	
 	letter_index +=1
 	if letter_index >= text.length():
 		finished_displaying.emit()
@@ -50,9 +54,6 @@ func _display_letter():
 			timer.start(space_time)
 		_:
 			timer.start(letter_time)
-
-
-
 func _on_letter_display_timer_timeout() -> void:
 	_display_letter()
 	pass # Replace with function body.
