@@ -3,6 +3,7 @@ extends LineEdit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.get_window().hide() #hide on start
 	self.text_submitted.connect(_text_submit)
 	SignalBus.show_user_input_field.connect(close_user_input)
 	self.get_window().close_requested.connect(close_user_input)

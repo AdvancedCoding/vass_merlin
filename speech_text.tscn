@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://fts77f0crpiv"]
+
+[ext_resource type="Texture2D" uid="uid://hyygmf5hjqt5" path="res://sprite/bubble.png" id="1_k5r3b"]
+[ext_resource type="Script" path="res://speech_text.gd" id="1_o56v3"]
+[ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="2_st6vj"]
+
+[node name="text_box" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_o56v3")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_k5r3b")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_st6vj")
+text = "Example"
+vertical_alignment = 1
+
+[node name="LetterDisplayTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]
