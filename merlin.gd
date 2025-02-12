@@ -15,8 +15,8 @@ func _ready() -> void:
 	ai_speak("Hello I am Merlin!")
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("click"):
-		move()
+	#if Input.is_action_just_pressed("click"):
+	#	move()
 	if Input.is_action_just_pressed("right_click"):
 		SignalBus.show_user_input_field.emit(true);
 		pass
@@ -45,7 +45,7 @@ func tween_window_move(b_window,to:Vector2i,dir:String):
 	animation.play(landstr)
 	
 func idle():
-	var r  = 0#randi_range(1, 4)
+	var r  = randi_range(1, 4)
 	match r:
 		1:
 			ai_speak("Hello are you there?")
