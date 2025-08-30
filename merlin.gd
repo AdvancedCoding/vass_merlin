@@ -10,6 +10,7 @@ var WINDOW_SIZE:Vector2
 #App.ico
 func _ready() -> void:
 	WINDOW_SIZE = get_window().size #Set initialsize to a var
+	#get_window().mouse_passthrough = true; #this can be used ?
 	#get_window().borderless = false #set this to true if you want to debug
 	get_window().size = Vector2(140,140)
 	animation.position = Vector2(0,0) #
