@@ -59,8 +59,7 @@ func _on_letter_display_timer_timeout() -> void:
 	pass # Replace with function body.
 
 func reset():
+	SignalBus.resize.emit(SignalBus.MERLIN_SIZES.DEFAULT)
 	await get_tree().create_timer(1).timeout
 	queue_free()
-	#global_position = orignal_pos;
-	#label.text = "";
 	

@@ -5,12 +5,16 @@ extends Node2D
 @onready var merlin_speech_bubble = preload("res://speech_text.tscn")
 var to: Vector2i
 
+var WINDOW_SIZE:Vector2
 # https://docs.godotengine.org/en/stable/tutorials/export/changing_application_icon_for_windows.html
 #App.ico
 func _ready() -> void:
+	WINDOW_SIZE = get_window().size #Set initialsize to a var
+	animation.position = Vector2(-80,50)
 	animation.animation_finished.connect(_on_animation_finished)
 	SignalBus.ai_response.connect(ai_speak)
 	SignalBus.idle_timer_triggered.connect(idle)
+	SignalBus.resize.connect(resize_merlin_window)
 	await  get_tree().create_timer(1.5).timeout #wait a moment that merlin can load in first
 	ai_speak("Hello I am Merlin!")
 
@@ -24,6 +28,7 @@ func _process(delta: float) -> void:
 
 func ai_speak(sentence:String):
 	create_merlin_speech_bubble()
+	SignalBus.resize.emit(SignalBus.MERLIN_SIZES.SPEECH)
 	SignalBus.merlin_speak.emit(sentence)
 	sam.speak(audio_player,sentence)
 
@@ -56,7 +61,15 @@ func idle():
 		4:
 			ai_speak("Uploading user data...")
 	pass
-	
+
+func resize_merlin_window(size:SignalBus.MERLIN_SIZES):
+	pass
+	#if(size==SignalBus.MERLIN_SIZES.DEFAULT):
+		#get_window().size = WINDOW_SIZE
+		##get_window().content_scale_size = WINDOW_SIZE
+	#else:
+		#get_window().size = Vector2(800,256)
+		##get_window().content_scale_size = Vector2(800,256)
 func create_merlin_speech_bubble():
 	var bubble = merlin_speech_bubble.instantiate() 
 	bubble.finished_displaying.connect(bubble.reset)
