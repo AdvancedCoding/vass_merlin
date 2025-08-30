@@ -4,13 +4,15 @@ extends Node2D
 @onready var animation:AnimatedSprite2D = $AnimatedSprite2D
 @onready var merlin_speech_bubble = preload("res://speech_text.tscn")
 var to: Vector2i
-
+@onready var merlin =$"."
 var WINDOW_SIZE:Vector2
 # https://docs.godotengine.org/en/stable/tutorials/export/changing_application_icon_for_windows.html
 #App.ico
 func _ready() -> void:
 	WINDOW_SIZE = get_window().size #Set initialsize to a var
-	animation.position = Vector2(-80,50)
+	#get_window().borderless = false #set this to true if you want to debug
+	get_window().size = Vector2(140,140)
+	animation.position = Vector2(0,0) #
 	animation.animation_finished.connect(_on_animation_finished)
 	SignalBus.ai_response.connect(ai_speak)
 	SignalBus.idle_timer_triggered.connect(idle)
@@ -71,9 +73,11 @@ func resize_merlin_window(size:SignalBus.MERLIN_SIZES):
 		#get_window().size = Vector2(800,256)
 		##get_window().content_scale_size = Vector2(800,256)
 func create_merlin_speech_bubble():
-	var bubble = merlin_speech_bubble.instantiate() 
-	bubble.finished_displaying.connect(bubble.reset)
-	get_tree().root.add_child(bubble)
+	var window_bubble = merlin_speech_bubble.instantiate()
+	var bubble = window_bubble.find_child("text_box")
+	get_tree().root.add_child(window_bubble)
+	bubble.set_merlin_instance(merlin)
+	print("%v merlin window pos" % [get_window().position])
 	
 func _on_animation_finished():
 	match animation.animation:

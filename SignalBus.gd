@@ -6,6 +6,8 @@ signal ask_ai(question:String)
 signal ai_response(answer:String)
 signal merlin_speak(paragraph:String)
 
+signal reset_speech_bubble()
+
 signal idle_timer_triggered()
 signal reset_idle_timer()
 
