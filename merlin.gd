@@ -22,10 +22,12 @@ func _ready() -> void:
 	SignalBus.idle_timer_triggered.connect(idle)
 	SignalBus.resize.connect(resize_merlin_window)
 	await  get_tree().create_timer(1.5).timeout #wait a moment that merlin can load in first
+	animation.play("hand_wave")
 	ai_speak("Hello I am Merlin!")
-	await  get_tree().create_timer(1.5).timeout
+	await  get_tree().create_timer(2).timeout
 	ai_speak("What is your name?")
 	await  get_tree().create_timer(1.5).timeout
+	ai_speak(random_joke())
 	
 
 func _process(delta: float) -> void:
@@ -72,7 +74,7 @@ func idle():
 		4:
 			ai_speak("Uploading user data...")
 		5:
-			ai_speak(joke_keyvalues[randi_range(1, 4)])
+			ai_speak(random_joke())
 	pass
 
 func resize_merlin_window(size:SignalBus.MERLIN_SIZES):
@@ -98,9 +100,10 @@ func _on_animation_finished():
 		_:
 			pass
 
-
+func random_joke()->String:
+	return joke_keyvalues[randi_range(0, 100000)]
 func load_from_file():
-	var file = FileAccess.open("res://data/jokes.txt", FileAccess.READ)
+	var file = FileAccess.open("res://data/jokes.txt", FileAccess.READ) #do not open jokes.txt in godot it will break your pc
 	var content = file.get_as_text()
 	var jokes = parse_csv_data(content)
 	return jokes

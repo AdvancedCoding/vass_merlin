@@ -17,14 +17,11 @@ func _ready() -> void:
 	SignalBus.reset_speech_bubble.connect(reset)
 	visible = false
 	get_window().position = Vector2(0,0)
-	get_window().size = Vector2(500,600)
+	get_window().size = Vector2(500,128)
 	#get_tree().get_instance_id()
-
 	var x = get_tree().get_nodes_in_group("world")
-	#original_pos = global_position;
 	MAX_WIDTH = get_window().size.x
 	global_position.y = 60;
-	#get_window().size = MAX_WIDTH
 	SignalBus.merlin_speak.connect(display_text)
 	
 func display_text(ai_text:String):
@@ -33,18 +30,19 @@ func display_text(ai_text:String):
 		visible = true
 		text = ai_text
 		label.text = ai_text
-		#await resized
+		await resized #waits for the smart text_box to resize
 		custom_minimum_size.x = min(size.x,MAX_WIDTH)
-		
-		
-		#if size.x > MAX_WIDTH:
-		#	label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		#	await resized #wait x
-		#	await resized #wait y
-		#	custom_minimum_size.y = size.y
-		#	
-		#global_position.x -= size.x / 2
-		global_position.y -= size.y + 24
+		#print(size.x)
+		#print(MAX_WIDTH)
+		#print(custom_minimum_size.x)
+		if size.x > MAX_WIDTH:
+			label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			await resized #wait x
+			await resized #wait y
+			custom_minimum_size.y = size.y+10
+		if label.get_line_count() > 1:
+			position.y -= label.get_line_height() * label.get_line_count()
+		get_window().position.y -= size.y + 24
 		label.text = ""
 		_display_letter()
 
@@ -52,6 +50,7 @@ func _display_letter():
 	label.text += text[letter_index]
 	letter_index +=1
 	if letter_index >= text.length():
+		await get_tree().create_timer(0.6).timeout
 		SignalBus.reset_speech_bubble.emit()
 		#finished_displaying.emit()
 		return

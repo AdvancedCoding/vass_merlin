@@ -3473,6 +3473,47 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ddwbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e8sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x8am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gijg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pixj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swvvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gwa7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcfcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gijg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x8am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e8sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddwbt")
+}],
+"loop": false,
+"name": &"hand_wave",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_v6m6k")
 }, {
 "duration": 1.0,
@@ -3556,7 +3597,6 @@ script = ExtResource("1_gfwlb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j3kvf")
-animation = &"fly_left"
 
 [node name="GDSAM" type="Node" parent="."]
 script = ExtResource("3_p2puk")
