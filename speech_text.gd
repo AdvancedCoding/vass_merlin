@@ -15,6 +15,7 @@ var MERLIN_WINDOW = Object
 #var original_pos: Vector2;
 func _ready() -> void:
 	SignalBus.reset_speech_bubble.connect(reset)
+	SignalBus.merlin_moved.connect(merlin_moved)
 	visible = false
 	get_window().position = Vector2(0,0)
 	get_window().size = Vector2(500,128)
@@ -30,18 +31,19 @@ func display_text(ai_text:String):
 		visible = true
 		text = ai_text
 		label.text = ai_text
-		await resized #waits for the smart text_box to resize
-		custom_minimum_size.x = min(size.x,MAX_WIDTH)
-		#print(size.x)
-		#print(MAX_WIDTH)
-		#print(custom_minimum_size.x)
-		if size.x > MAX_WIDTH:
-			label.autowrap_mode = TextServer.AUTOWRAP_WORD
-			await resized #wait x
-			await resized #wait y
-			custom_minimum_size.y = size.y+10
-		if label.get_line_count() > 1:
-			position.y -= label.get_line_height() * label.get_line_count()
+		if(ai_text.length() >7):
+			await resized #waits for the smart text_box to resize
+			custom_minimum_size.x = min(size.x,MAX_WIDTH)
+			#print(size.x)
+			#print(MAX_WIDTH)
+			#print(custom_minimum_size.x)
+			if size.x > MAX_WIDTH:
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD
+				await resized #wait x
+				await resized #wait y
+				custom_minimum_size.y = size.y+10
+			if label.get_line_count() > 1:
+				position.y -= label.get_line_height() * label.get_line_count()
 		get_window().position.y -= size.y + 24
 		label.text = ""
 		_display_letter()
@@ -74,5 +76,16 @@ func set_merlin_instance(merlin:Node2D):
 	#print("%v merlin ref window pos" % [merlin.get_window().position])
 	#print("%v merlin textbox window pos" % [get_window().position])
 	var m = merlin.get_window()
+	MERLIN_WINDOW = m
 	var pos = Vector2(m.position.x-m.size.x/2,m.position.y-m.size.y/2)
 	get_window().position = pos;
+func merlin_moved():
+	var m = MERLIN_WINDOW
+	var pos = Vector2(m.position.x-m.size.x/2,m.position.y-m.size.y/2)
+	get_window().position = pos;
+	print("now")
+func _physics_process(delta: float) -> void:
+	if MERLIN_WINDOW:
+		var m = MERLIN_WINDOW
+		var pos = Vector2(m.position.x-m.size.x/2,m.position.y-m.size.y)
+		get_window().position = pos;

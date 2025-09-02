@@ -38,6 +38,8 @@ func _process(delta: float) -> void:
 		pass
 	pass
 
+
+#TODO: IMPLEMENT QUEUE, with functions "ADD TO", AND "CLEAR". Queue must loop and contain breaks
 func ai_speak(sentence:String):
 	create_merlin_speech_bubble()
 	SignalBus.resize.emit(SignalBus.MERLIN_SIZES.SPEECH)
@@ -56,13 +58,15 @@ func move():
 		#get_window().position = to	
 func tween_window_move(b_window,to:Vector2i,dir:String):
 	var tween = get_tree().create_tween()
+	tween.step_finished.connect(step)
 	tween.tween_property(b_window, "position", to, 0.7)
 	await tween.finished
 	var landstr :String = "land"+dir.erase(0,3) 
 	animation.play(landstr)
-	
+func step(idx:int):
+	SignalBus.merlin_moved.emit()
 func idle():
-	var r  = randi_range(1, 5)
+	var r  = 2#randi_range(1, 5)
 	match r:
 		1:
 			ai_speak("Hello are you there?")
