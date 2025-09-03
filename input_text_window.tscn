@@ -24,6 +24,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 0
 placeholder_text = "Ask AI"
-alignment = 1
 max_length = 10000
+clear_button_enabled = true
 script = ExtResource("1_j3oqw")

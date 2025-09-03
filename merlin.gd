@@ -6,6 +6,7 @@ extends Node2D
 var to: Vector2i
 @onready var merlin =$"."
 @onready var joke_keyvalues = load_from_file();
+@onready var magic_8ballresponses:Array = ["It is certain","It is decidedly so","Without a doubt","Yes definitely","You may rely on it","As I see it, yes","Most likely","Outlook good","Yes","Signs point to yes","Reply hazy, try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful"]
 var WINDOW_SIZE:Vector2
 # https://docs.godotengine.org/en/stable/tutorials/export/changing_application_icon_for_windows.html
 #App.ico
@@ -21,6 +22,7 @@ func _ready() -> void:
 	SignalBus.ai_response.connect(ai_speak)
 	SignalBus.idle_timer_triggered.connect(idle)
 	SignalBus.resize.connect(resize_merlin_window)
+	SignalBus.ask_magic8ball.connect(magic8ball)
 	await  get_tree().create_timer(1.5).timeout #wait a moment that merlin can load in first
 	animation.play("hand_wave")
 	ai_speak("Hello I am Merlin!")
@@ -66,7 +68,7 @@ func tween_window_move(b_window,to:Vector2i,dir:String):
 func step(idx:int):
 	SignalBus.merlin_moved.emit()
 func idle():
-	var r  = 2#randi_range(1, 5)
+	var r  = randi_range(1, 5)
 	match r:
 		1:
 			ai_speak("Hello are you there?")
@@ -121,3 +123,6 @@ func parse_csv_data(csv_data):
 			var value = parts[1].strip_edges()     # Get the value
 			result[key] = value
 	return result
+
+func magic8ball()->void:
+	ai_speak( magic_8ballresponses[randi_range(0, magic_8ballresponses.size())])

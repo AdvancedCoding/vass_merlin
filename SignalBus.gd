@@ -4,6 +4,7 @@ extends Node
 signal show_user_input_field(show:bool)
 signal ask_ai(question:String)
 signal ai_response(answer:String)
+signal ask_magic8ball(question:String)
 signal merlin_speak(paragraph:String)
 signal merlin_moved() #add merlin ref?
 
