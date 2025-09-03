@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://fts77f0crpiv"]
 
 [ext_resource type="Texture2D" uid="uid://hyygmf5hjqt5" path="res://sprite/bubble.png" id="1_k5r3b"]
-[ext_resource type="Script" path="res://speech_text.gd" id="1_o56v3"]
+[ext_resource type="Script" path="res://src/speech_text.gd" id="1_o56v3"]
 [ext_resource type="FontFile" uid="uid://c01ly2iyh2l58" path="res://fonts/PixelOperator8.ttf" id="2_st6vj"]
 
 [node name="Window" type="Window"]

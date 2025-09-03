@@ -1,6 +1,6 @@
 [gd_scene load_steps=507 format=3 uid="uid://crp6dav3uvo7h"]
 
-[ext_resource type="Script" path="res://merlin.gd" id="1_gfwlb"]
+[ext_resource type="Script" path="res://src/merlin.gd" id="1_gfwlb"]
 [ext_resource type="Texture2D" uid="uid://ps5uvi4cynvq" path="res://sprite/merlin1.png" id="1_wbprb"]
 [ext_resource type="Script" path="res://addons/gdsam/gdsam.gd" id="3_p2puk"]
 

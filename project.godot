@@ -13,7 +13,7 @@ config_version=5
 config/name="merlin_vass"
 config/description="merlin"
 config/version="1.0"
-run/main_scene="res://world.tscn"
+run/main_scene="res://src/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://icon.png"
 boot_splash/fullsize=false
@@ -22,7 +22,7 @@ config/windows_native_icon="res://sprite/icon.ico"
 
 [autoload]
 
-SignalBus="*res://SignalBus.gd"
+SignalBus="*res://src/SignalBus.gd"
 
 [display]
 

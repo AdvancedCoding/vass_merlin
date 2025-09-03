@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cw40m6obsmyq7"]
 
-[ext_resource type="Script" path="res://user_input.gd" id="1_j3oqw"]
+[ext_resource type="Script" path="res://src/user_input.gd" id="1_j3oqw"]
 
 [node name="Window" type="Window"]
 transparent_bg = true

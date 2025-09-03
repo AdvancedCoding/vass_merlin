@@ -2,7 +2,7 @@ extends Node2D
 @onready var sam:GDSAM= $GDSAM;
 @onready var audio_player = $AudioStreamPlayer
 @onready var animation:AnimatedSprite2D = $AnimatedSprite2D
-@onready var merlin_speech_bubble = preload("res://speech_text.tscn")
+@onready var merlin_speech_bubble = preload("res://src/speech_text.tscn")
 var to: Vector2i
 @onready var merlin =$"."
 @onready var joke_keyvalues = load_from_file();
