@@ -49,8 +49,10 @@ func get_matching_suggestions(input: String) -> Array:
 	return matches
 func _process(delta: float) -> void:
 	if Input.is_physical_key_pressed(KEY_TAB):
-		text = get_matching_suggestions(text).pop_front()
-		caret_column = text.length()
+		var matched:Array = get_matching_suggestions(text);
+		if(matched.size()>0): #else it will crash
+			text = matched.pop_front()
+			caret_column = text.length()
 		
 #func get_popup() -> PopupMenu:
 	#if not has_node("AutocompletePopup"):

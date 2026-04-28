@@ -125,4 +125,4 @@ func parse_csv_data(csv_data):
 	return result
 
 func magic8ball()->void:
-	ai_speak( magic_8ballresponses[randi_range(0, magic_8ballresponses.size())])
+	ai_speak( magic_8ballresponses[randi_range(0, magic_8ballresponses.size()-1)])
