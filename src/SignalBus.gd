@@ -19,3 +19,8 @@ enum MERLIN_SIZES {
 	SPEECH,  
 } 
 signal resize(SIZE: MERLIN_SIZES)
+
+
+#OS functions called from anywhere implemented in world.gd
+#Prefix??? OS.send?
+signal send_notification(title:String, message:String)

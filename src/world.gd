@@ -6,6 +6,7 @@ func _ready() -> void:
 	#print(self.get_window().transparent)
 	#get_window().size = Vector2(1000,1000)
 	SignalBus.ask_ai.connect(ask_AI)
+	SignalBus.send_notification.connect(send_notification)
 	http_request.request_completed.connect(self._http_request_completed)
 	#https://docs.godotengine.org/en/stable/classes/class_window.html#class-window --self.get_window()
 	self.get_window().mouse_entered.connect(_mouse) #Gets Window from this instance
@@ -60,3 +61,25 @@ func _http_request_completed(result: int, response_code: int, headers: PackedStr
 		SignalBus.ai_response.emit(parsed)
 		print(parsed)
 		pass
+
+#Shows a notification "toast"
+func send_notification(title:String, message:String)->void:
+	var app_name = ProjectSettings.get_setting("application/config/name")
+	if app_name.is_empty():
+		app_name = "Unnamed Project"
+	if OS.has_feature("macos") and not OS.is_sandboxed():
+		# Note that this will not work if the project is exported in sandbox mode
+		# (e.g. for the Mac App Store).
+		OS.execute("osascript", [
+				"-e",
+				'display notification \\"%s\\" with title \\"%s\\" subtitle \\"%s\\"' % [
+					message,
+					app_name,
+					title,
+				]
+			])
+	elif OS.has_feature("linuxbsd"):
+		OS.execute("notify-send", ["--app-name", app_name, title, message])
+		
+		
+		
