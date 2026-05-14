@@ -24,3 +24,8 @@ signal resize(SIZE: MERLIN_SIZES)
 #OS functions called from anywhere implemented in world.gd
 #Prefix??? OS.send?
 signal send_notification(title:String, message:String)
+
+#Invokes bash or equivilant to spawn a background process which is not dependant of merlin
+signal spawn_proc(proc:String,args:PackedStringArray)
+#Kills a process by name
+signal kill_proc(proc:String)

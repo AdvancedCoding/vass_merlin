@@ -10,13 +10,30 @@ func _ready() -> void:
 	self.get_window().close_requested.connect(close_user_input)
 	pass # Replace with function body.
 
-func _text_submit(s:String):
-
-		if s.contains("/AskAI"):
-			SignalBus.ask_ai.emit(s) #ask ai and clear text
-		if s.contains("/8Ball"):
-			SignalBus.ask_magic8ball.emit()
-		self.text = "";
+func _text_submit(st:String):
+	var s=st
+	if s.contains("/AskAI"):
+		SignalBus.ask_ai.emit(s) #ask ai and clear text
+	if s.contains("/8Ball"):
+		SignalBus.ask_magic8ball.emit()
+	if s.contains("/firefox"):
+		SignalBus.spawn_proc.emit("firefox",["-private-window",parse_text_to_query(s)])
+	if s.contains("/wiki"):
+		s =s.replace('/wiki','')
+		SignalBus.spawn_proc.emit("firefox",["-private-window",parse_text_to_query(s,"wiki")])
+	if s.contains("/c"):
+		s =s.replace('/c','')
+		SignalBus.spawn_proc.emit(s)
+	self.text = "";
+		
+func parse_text_to_query(s:String,engine="google")->String:
+	s.replace(' ','+')
+	print(s)
+	if(engine == "wiki"):
+		return "'https://en.wikipedia.org/w/index.php?title=Special:Search&search={s}'".format({"s":s});
+	else:
+		return "'https://www.google.com/search?q={s}'".format({"s":s});
+	pass
 func close_user_input(show:bool=false):
 	if show:
 		self.get_window().show()
@@ -24,7 +41,7 @@ func close_user_input(show:bool=false):
 		self.get_window().hide()
 
 # Array of strings for autocomplete
-var autocomplete_options = ["/8Ball", "/Test","/AskAI"]
+var autocomplete_options = ["/8Ball", "/Test","/AskAI","/firefox","/wiki"]
 #var popup:PopupMenu;
 func _on_text_changed(new_text: String):
 	#get_popup().clear()

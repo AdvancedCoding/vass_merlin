@@ -7,6 +7,8 @@ func _ready() -> void:
 	#get_window().size = Vector2(1000,1000)
 	SignalBus.ask_ai.connect(ask_AI)
 	SignalBus.send_notification.connect(send_notification)
+	SignalBus.spawn_proc.connect(spawn_proc)
+	SignalBus.kill_proc.connect(kill_proc)
 	http_request.request_completed.connect(self._http_request_completed)
 	#https://docs.godotengine.org/en/stable/classes/class_window.html#class-window --self.get_window()
 	self.get_window().mouse_entered.connect(_mouse) #Gets Window from this instance
@@ -82,4 +84,55 @@ func send_notification(title:String, message:String)->void:
 		OS.execute("notify-send", ["--app-name", app_name, title, message])
 		
 		
+func spawn_proc(proc:String,args=[])->void:
+	print(proc)
+	var joined_args = " ".join(args)
+	await  get_tree().create_timer(0.5).timeout
+	var exit_code = OS.execute_with_pipe("bash", [
+			"-c", 
+			proc+" "+joined_args
+		]);
+func kill_proc(process_name:String):
+	var pids =get_pid_by_name(process_name,true)
+	if (pids.size() == 0): return;
+	for pid in pids:
+		OS.kill(pid);
+	#print(get_pid_by_name(process_name,true))
+
+# ------------ EXTENSION FUNCTIONS FOR OS SYS CALLS ETC -----------------------
+func get_pid_by_name(process_name: String,is_like:bool=true) -> Array[int]:
+	var pids: Array[int] = []
+	var output: Array = []
+	var p_name = process_name.to_lower();
+	var os = OS.get_name();
+	print(os)
+	if os == "Windows":
+		# tasklist /FI "IMAGENAME eq example.exe"
+		var exit_code = OS.execute("tasklist", ["/FI", "IMAGENAME eq " + process_name, "/FO", "CSV", "/NH"], output, true)
+		if exit_code != 0:
+			return pids
+		for line in output:
+			if line.strip_edges().is_empty():
+				continue
+			var parts = line.split('","')
+			if parts.size() > 1:
+				var name = parts[0].strip_edges().replace('"', '')
+				if name.to_lower() == p_name or is_like and name.to_lower().contains(p_name):
+					var pid_str = parts[1].strip_edges().replace('"', '')
+					pids.append(int(pid_str))
+	elif os in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "macOS"]:
+		var exit_code = OS.execute("bash", [
+			"-c", 
+			'ps -eo pid,comm --no-headers | grep -i "' + process_name + '" | awk \'{print $1}\''
+		], output, true)
 		
+		if exit_code != 0 or output.size()<1:
+			return pids
+		for line in output[0].split("\n"):
+			line = line.strip_edges()
+			if not line.is_empty():
+				pids.append(int(line))
+	else:
+		push_warning("Unsupported platform for get_pid_by_name")
+	return pids
+# ------------END EXTENSION FUNCTIONS FOR OS SYS CALLS ETC -----------------------

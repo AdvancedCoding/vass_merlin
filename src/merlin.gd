@@ -27,9 +27,19 @@ func _ready() -> void:
 	animation.play("hand_wave")
 	ai_speak("Hello I am Merlin!")
 	await  get_tree().create_timer(2).timeout
-	ai_speak("What is your name?")
+	merlin_greetings();
+	await  get_tree().create_timer(4.5).timeout
+	
+	#var test = "chromium-browser"
+	#SignalBus.kill_proc(test);
+	#SignalBus.send_notification.emit("Merlin says:", "iam terminating "+test);
+	
+
+
 	await  get_tree().create_timer(1.5).timeout
-	ai_speak(random_joke())
+	#SignalBus.spawn_proc.emit("firefox", ["-private-window", "'https://www.google.com/search?q=youtube'"])
+	#await  get_tree().create_timer(1.5).timeout
+	#ai_speak(random_joke())
 	
 
 func _process(delta: float) -> void:
@@ -39,6 +49,8 @@ func _process(delta: float) -> void:
 		SignalBus.show_user_input_field.emit(true);
 		pass
 	pass
+
+
 
 
 #TODO: IMPLEMENT QUEUE, with functions "ADD TO", AND "CLEAR". Queue must loop and contain breaks
@@ -82,7 +94,17 @@ func idle():
 		5:
 			ai_speak(random_joke())
 	pass
-
+func merlin_greetings():
+	var r  = randi_range(1, 2)
+	match r:
+		1:
+			ai_speak(merlin_os_greetings())
+		2:
+			ai_speak("What is your name?")
+		3:
+			pass
+	pass
+	
 func resize_merlin_window(size:SignalBus.MERLIN_SIZES):
 	pass
 	#if(size==SignalBus.MERLIN_SIZES.DEFAULT):
@@ -126,3 +148,21 @@ func parse_csv_data(csv_data):
 
 func magic8ball()->void:
 	ai_speak( magic_8ballresponses[randi_range(0, magic_8ballresponses.size()-1)])
+	
+func merlin_os_greetings()->String:
+	match OS.get_name():
+		"Windows":
+			return "I see you are using spyware called windows, then iam a perfect buddy for you"
+		"macOS":
+			return "Welcome to macOS!"
+		"Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+			return "I see that I'm running on penguin, how does that even work!?"
+		"Android":
+			return "Android I see you are a robot..."
+		"iOS":
+			return "Epple"
+		"Web":
+			return "Everything is made for spiders smh.."
+	return ""
+	
+	
