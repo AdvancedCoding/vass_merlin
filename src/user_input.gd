@@ -9,7 +9,11 @@ func _ready() -> void:
 	SignalBus.show_user_input_field.connect(close_user_input)
 	self.get_window().close_requested.connect(close_user_input)
 	pass # Replace with function body.
-
+func get_applicationpath(s:String)->String:
+	if OS.has_feature("macos") and not OS.is_sandboxed():
+		return "/Applications/{a}.app/Contents/MacOS/{t}".format({"a":s.capitalize()}).format({"t":s.trim_prefix(" ")})
+	else:
+		return s
 func _text_submit(st:String):
 	var s=st
 	if s.contains("/AskAI"):
@@ -17,13 +21,14 @@ func _text_submit(st:String):
 	if s.contains("/8Ball"):
 		SignalBus.ask_magic8ball.emit()
 	if s.contains("/firefox"):
-		SignalBus.spawn_proc.emit("firefox",["-private-window",parse_text_to_query(s)])
+		s = s.replace('/firefox','')
+		SignalBus.spawn_proc.emit(get_applicationpath("firefox"),["-private-window",parse_text_to_query(s)])
 	if s.contains("/wiki"):
-		s =s.replace('/wiki','')
-		SignalBus.spawn_proc.emit("firefox",["-private-window",parse_text_to_query(s,"wiki")])
+		s = s.replace('/wiki','')
+		SignalBus.spawn_proc.emit(get_applicationpath("firefox"),["-private-window",parse_text_to_query(s,"wiki")])
 	if s.contains("/c"):
-		s =s.replace('/c','')
-		SignalBus.spawn_proc.emit(s)
+		s = s.replace('/c','')
+		SignalBus.spawn_proc.emit(get_applicationpath(s))
 	self.text = "";
 		
 func parse_text_to_query(s:String,engine="google")->String:

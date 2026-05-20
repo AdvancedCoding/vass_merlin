@@ -8,12 +8,15 @@ var to: Vector2i
 @onready var joke_keyvalues = load_from_file();
 @onready var magic_8ballresponses:Array = ["It is certain","It is decidedly so","Without a doubt","Yes definitely","You may rely on it","As I see it, yes","Most likely","Outlook good","Yes","Signs point to yes","Reply hazy, try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful"]
 var WINDOW_SIZE:Vector2
+@onready var window : Window = get_window()
 # https://docs.godotengine.org/en/stable/tutorials/export/changing_application_icon_for_windows.html
 #App.ico
 func _ready() -> void:
 	
 	#print(x)
 	WINDOW_SIZE = get_window().size #Set initialsize to a var
+	print("window")
+	print(DisplayServer.screen_get_size())
 	#get_window().mouse_passthrough = true; #this can be used ?
 	#get_window().borderless = false #set this to true if you want to debug
 	get_window().size = Vector2(140,140)
@@ -62,8 +65,9 @@ func ai_speak(sentence:String):
 
 func move():
 		var rand = RandomNumberGenerator.new()
-		var x = rand.randi_range(128, 3200)
-		var y = rand.randi_range(128, 1000)
+		var s = 128;
+		var x = rand.randi_range(s, DisplayServer.screen_get_size().x-s)
+		var y = rand.randi_range(s, DisplayServer.screen_get_size().y-s)
 		to= Vector2i(x, y)
 		if(to.x<get_window().position.x):
 			animation.play("fly_left")	

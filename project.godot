@@ -33,11 +33,12 @@ window/size/borderless=true
 window/size/always_on_top=true
 window/size/transparent=true
 window/subwindows/embed_subwindows=false
+window/dpi/allow_hidpi=false
 window/per_pixel_transparency/allowed=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdsam/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 
@@ -60,5 +61,6 @@ right_click={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 0)
 viewport/transparent_background=true
