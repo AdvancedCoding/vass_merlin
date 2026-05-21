@@ -1,12 +1,390 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <header></header>
-    <main>Test</main>
-    <footer></footer>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERLIN • AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap');
+        
+        :root {
+            --blue: #000000;/*0a2540*/
+            --lightblue: #60a5fa;
+            --gold: #facc15;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a2540 0%, #1e3a8a 100%);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #facc15;
+            transform: translateY(-2px);
+        }
+
+        .glow-gold {
+            text-shadow: 0 0 20px rgb(250 204 21);
+        }
+
+        .section-header {
+            background: linear-gradient(to right, #60a5fa, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+	.merlin,#merlin {
+			background: url("merlin.png"),linear-gradient(45deg, #1e2937, #334155);
+			background-repeat: no-repeat;
+		    background-position: center;
+			height: 100px !important;
+		}
+
+        .gif-placeholder {
+				/*background-image: url("merlin.png");*/
+			background: url("merlin.png"),linear-gradient(45deg, #1e2937, #334155);
+			background-repeat: no-repeat;
+            border: 2px dashed #64748b;
+            transition: all 0.4s ease;
+        }
+        
+        .gif-placeholder:hover {
+            border-color: #facc15;
+            transform: scale(1.02);
+        }
+
+        .magic-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #facc15;
+            border-radius: 50%;
+            animation: floatParticle 15s linear infinite;
+            opacity: 0.3;
+        }
+	    </style>
+</head>
+<body class="bg-[#0a1729] text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a1729]/90 backdrop-blur-lg border-b border-blue-900">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-400 to-yellow-400 flex items-center justify-center text-2xl shadow-lg">
+                    🪄
+                </div>
+                <div>
+                    <span class="heading-font text-3xl font-bold tracking-tighter">MERLIN</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-10 text-sm font-medium">
+                <a href="#features" class="nav-link text-gray-300 hover:text-white">Features</a>
+                <a href="#platforms" class="nav-link text-gray-300 hover:text-white">Platforms</a>
+                <a href="#summon" class="nav-link text-gray-300 hover:text-white">Summon</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="document.getElementById('summon').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-6 py-2.5 bg-yellow-400 hover:bg-yellow-300 transition-colors text-black font-semibold rounded-2xl flex items-center gap-2 text-sm">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    SUMMON MERLIN
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="home" class="hero-bg min-h-screen flex items-center relative pt-20">
+        <div id="particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-md rounded-3xl text-sm border border-white/20">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    Cross-platform AI Wizard
+                </div>
+                
+                <h1 class="heading-font text-7xl md:text-8xl font-bold leading-none tracking-tighter">
+                    MERLIN.<br>
+                    <span class="section-header">PURE MAGICK.</span>
+                </h1>
+                
+                <p class="text-2xl text-blue-200 max-w-lg">
+                    The legendary AI assistant that turns your intentions into intelligent action.
+                </p>
+                
+                <div class="flex items-center gap-6">
+                    <button onclick="document.getElementById('summon').scrollIntoView({ behavior: 'smooth' })" 
+                            class="px-10 py-5 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-black text-xl font-semibold rounded-3xl flex items-center gap-3 shadow-2xl shadow-yellow-500/30 transition-all active:scale-95">
+                        <i class="fas fa-sparkles"></i>
+                        SUMMON MERLIN
+                    </button>
+                    
+                    <div class="text-sm leading-tight">
+                        <div class="text-yellow-400">★★★★★</div>
+                        <div class="text-gray-400">Trusted by thousands of modern mages</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-8 text-sm pt-6 border-t border-white/10">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-mobile-screen-button text-blue-400"></i>
+                        <span>iOS &amp; Android</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-desktop text-blue-400"></i>
+                        <span>Mac • Windows • Web</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero visual -->
+            <div class="relative">
+                <div class="aspect-square max-w-lg mx-auto bg-gradient-to-br from-blue-500/20 to-yellow-400/10 rounded-[4rem] border border-white/20 backdrop-blur-xl p-8 shadow-2xl">
+                    <div class="w-full h-full bg-[#0f253f] rounded-3xl flex items-center justify-center relative overflow-hidden">
+                        <div class="text-center">
+						    <img src="merlin.png" alt="merlin">
+                            <div class="text-blue-300 text-xl tracking-widest">MERLIN v1.8.4</div>
+                            <div class="mt-2 text-amber-300 font-medium">"What is thy will, master?"</div>
+                        </div>
+                        
+                        <!-- orbiting rings -->
+                        <div class="absolute inset-0 border border-dashed border-yellow-400/30 rounded-3xl animate-[spin_25s_linear_infinite]"></div>
+                        <div class="absolute inset-8 border border-dashed border-blue-400/30 rounded-3xl animate-[spin_18s_linear_infinite_reverse]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 flex flex-col items-center">
+            <div class="text-xs tracking-widest text-blue-300 mb-2">SCROLL TO DISCOVER THE MAGICK</div>
+            <i class="fas fa-chevron-down animate-bounce text-2xl text-yellow-400"></i>
+        </div>
+    </header>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-24 bg-[#0a1729]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="px-6 py-2 bg-blue-900/50 text-blue-300 text-sm rounded-3xl">ARCANE CAPABILITIES</span>
+                <h2 class="heading-font text-6xl font-bold mt-4">Ancient Wisdom.<br>Modern Intelligence.</h2>
+            </div>
+            
+            <!-- Feature 1 -->
+            <div class="grid md:grid-cols-12 gap-12 items-center mb-32">
+                <div class="md:col-span-5">
+                    <div class="gif-placeholder h-96 rounded-3xl flex items-center justify-center text-center p-8">
+                        <div>
+                            <div class="text-6xl mb-4">🌌</div>
+                            <p class="text-yellow-300 font-medium">PROMOTIONAL GIF 1 PLACEHOLDER</p>
+                            <p class="text-sm text-gray-500 mt-2">Voice summoning &amp; intuitive interaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7">
+                    <div class="max-w-lg">
+                        <div class="uppercase text-yellow-400 text-sm tracking-widest mb-3">INTENT RECOGNITION</div>
+                        <h3 class="heading-font text-5xl leading-none font-semibold mb-6">Speak thy desire.<br>Watch reality bend.</h3>
+                        <p class="text-xl text-gray-300">
+                            Merlin doesn't just listen — he <span class="text-yellow-300">understands the deeper meaning</span> behind your words. 
+                            Our enchanted model anticipates your needs before you fully express them.
+                        </p>
+                        <ul class="mt-8 space-y-4">
+                            <li class="flex items-center gap-3 text-lg"><i class="fas fa-check text-emerald-400"></i> Perfect memory across all devices</li>
+                            <li class="flex items-center gap-3 text-lg"><i class="fas fa-check text-emerald-400"></i> Emotion &amp; intent analysis</li>
+                            <li class="flex items-center gap-3 text-lg"><i class="fas fa-check text-emerald-400"></i> Proactive magical assistance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="grid md:grid-cols-12 gap-12 items-center mb-32">
+                <div class="md:col-span-7 md:order-2">
+                    <div class="max-w-lg md:ml-auto">
+                        <div class="uppercase text-yellow-400 text-sm tracking-widest mb-3">CROSS-PLATFORM SYNCHRONY</div>
+                        <h3 class="heading-font text-5xl leading-none font-semibold mb-6">One consciousness.<br>Every realm.</h3>
+                        <p class="text-xl text-gray-300">
+                            Continue your conversation seamlessly from phone to desktop to tablet. 
+                            Merlin, your loyal digital familiar, never forgets.
+                        </p>
+                        <div class="mt-10 grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-white/5 p-6 rounded-2xl">
+                                <i class="fab fa-apple text-3xl mb-3 block"></i>
+                                <div class="font-medium">iOS</div>
+                            </div>
+                            <div class="bg-white/5 p-6 rounded-2xl">
+                                <i class="fab fa-android text-3xl mb-3 block"></i>
+                                <div class="font-medium">Android</div>
+                            </div>
+                            <div class="bg-white/5 p-6 rounded-2xl">
+                                <i class="fas fa-globe text-3xl mb-3 block"></i>
+                                <div class="font-medium">Web</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-5 md:order-1">
+                    <div class="gif-placeholder h-96 rounded-3xl flex items-center justify-center text-center p-8">
+                        <div>
+                            <div class="text-6xl mb-4">🔄</div>
+                            <p class="text-yellow-300 font-medium">PROMOTIONAL GIF 2 PLACEHOLDER</p>
+                            <p class="text-sm text-gray-500 mt-2">Seamless multi-device sync</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-5">
+                    <div class="gif-placeholder h-96 rounded-3xl flex items-center justify-center text-center p-8">
+                        <div>
+                            <div class="text-6xl mb-4">⚡</div>
+                            <p class="text-yellow-300 font-medium">PROMOTIONAL GIF 3 PLACEHOLDER</p>
+                            <p class="text-sm text-gray-500 mt-2">Intelligent task automation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7">
+                    <div class="max-w-lg">
+                        <div class="uppercase text-yellow-400 text-sm tracking-widest mb-3">AUTOMATIC SORCERY</div>
+                        <h3 class="heading-font text-5xl leading-none font-semibold mb-6">Turn words into workflow wizardry.</h3>
+                        <p class="text-xl text-gray-300">
+                            From crafting eloquent messages to analyzing data with enchanted precision, 
+                            Merlin executes complex tasks with grace and power.
+                        </p>
+                        <div class="mt-10 flex items-center gap-8 text-sm">
+                            <div class="flex-1 bg-gradient-to-br from-blue-900/60 to-transparent p-6 rounded-3xl border border-blue-700">
+                                <strong class="block text-yellow-300">99.8%</strong>
+                                <span class="text-gray-400">Task success rate</span>
+                            </div>
+                            <div class="flex-1 bg-gradient-to-br from-amber-900/60 to-transparent p-6 rounded-3xl border border-amber-700">
+                                <strong class="block text-yellow-300">0.3s</strong>
+                                <span class="text-gray-400">Average response</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATFORMS -->
+    <section id="platforms" class="py-24 bg-gradient-to-b from-[#0a1729] to-[#0f253f]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-5xl font-bold mb-4">Available Wherever You Conjure</h2>
+            <p class="text-blue-200 max-w-md mx-auto">Your personal AI wizard follows you across every device and platform.</p>
+            
+            <div class="flex flex-wrap justify-center gap-8 mt-16">
+                <div class="bg-white/5 px-10 py-8 rounded-3xl w-52 hover:bg-white/10 transition-colors">
+                    <i class="fab fa-apple text-6xl mb-4"></i>
+                    <div class="text-xl font-semibold">iPhone &amp; iPad</div>
+                </div>
+                <div class="bg-white/5 px-10 py-8 rounded-3xl w-52 hover:bg-white/10 transition-colors">
+                    <i class="fab fa-android text-6xl mb-4"></i>
+                    <div class="text-xl font-semibold">Android</div>
+                </div>
+                <div class="bg-white/5 px-10 py-8 rounded-3xl w-52 hover:bg-white/10 transition-colors">
+                    <i class="fas fa-desktop text-6xl mb-4"></i>
+                    <div class="text-xl font-semibold">Desktop</div>
+                </div>
+                <div class="bg-white/5 px-10 py-8 rounded-3xl w-52 hover:bg-white/10 transition-colors">
+                    <i class="fas fa-globe text-6xl mb-4"></i>
+                    <div class="text-xl font-semibold">Web Browser</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="summon" class="py-32 bg-gradient-to-br from-[#1e3a8a] via-blue-900 to-[#0a1729] relative overflow-hidden">
+        <div class="max-w-2xl mx-auto text-center px-6">
+            <div class="text-7xl mb-8">🧙‍♂️</div>
+            <h2 class="heading-font text-6xl font-bold mb-6">Ready to harness true magick?</h2>
+            <p class="text-2xl text-blue-100 mb-10">
+                Join the new generation of creators and thinkers with Merlin by your side.
+            </p>
+            <button onclick="alert('Thank you! Download links for official builds coming soon! ✨')" 
+                    class="px-16 py-7 text-2xl font-semibold bg-white text-black rounded-3xl hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-4 shadow-2xl shadow-yellow-400/40">
+                <span>SUMMON MERLIN NOW</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="mt-8 text-sm text-blue-300">Free to summon • No credit card required</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center gap-3 mb-6 md:mb-0">
+                    <div class="w-7 h-7 rounded-2xl bg-gradient-to-br from-blue-400 to-yellow-400 flex items-center justify-center">🪄</div>
+                    <span class="heading-font text-2xl">MERLIN AI</span>
+                </div>
+                
+                <div class="text-xs text-gray-500 max-w-xs text-center md:text-right">
+                    © 2026 Merlin_vass. All rights reserved.<br>
+                    <span class="text-[10px] leading-relaxed">
+                        This is a fictional demonstration of a corporate website.
+						Merlin AI does not currently exist or hold any trademarks. 
+                        Any resemblance to real AI products is purely coincidental.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 35; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'magic-particle';
+                
+                const size = Math.random() * 5 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                particle.style.animationDuration = `${Math.random() * 20 + 15}s`;
+                particle.style.animationDelay = `-${Math.random() * 20}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        window.onload = function() {
+            createParticles();
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        };
+    </script>
+</body>
 </html>
